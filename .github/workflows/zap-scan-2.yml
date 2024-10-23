@@ -22,7 +22,8 @@ jobs:
       - name: Run OWASP ZAP Quick Scan
         run: |
           docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable \
-          zap.sh -cmd -quickurl http://juiceshop.herokuapp.com -quickout zap_report.html -quickreport html
+          zap-baseline.py \
+          -t https://www.example.com -g gen.conf -r testreport.html
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v2
