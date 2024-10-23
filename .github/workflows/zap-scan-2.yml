@@ -29,7 +29,7 @@ jobs:
         run: |
           docker run -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable \
           zap-baseline.py \
-          -t https://juice-shop.herokuapp.com/#/ -T 10 -g gen.conf -r testreport.html
+          -t https://www.example.com -g gen.conf -r testreport.html
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
