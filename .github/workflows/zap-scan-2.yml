@@ -1,0 +1,31 @@
+name: OWASP ZAP Quick Scan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Pull OWASP ZAP Docker Image
+        run: docker pull owasp/zap2docker-stable
+
+      - name: Run OWASP ZAP Quick Scan
+        run: |
+          docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable \
+          zap.sh -cmd -quickurl http://juiceshop.herokuapp.com -quickout zap_report.html -quickreport html
+
+      - name: Upload ZAP Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: zap-report
+          path: zap_report.html
