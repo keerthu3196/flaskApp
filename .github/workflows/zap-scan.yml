@@ -17,9 +17,9 @@ jobs:
 
       - name: Install OWASP ZAP
         run: |
-          sudo add-apt-repository ppa:owasp-zap/ppa
-          sudo apt-get update
-          sudo apt-get install zaproxy
+          sudo apt update
+          sudo apt install snapd
+          sudo snap install zaproxy --classic
 
       - name: Run ZAP scan
         run: |
