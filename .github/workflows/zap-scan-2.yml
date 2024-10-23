@@ -3,10 +3,10 @@ name: OWASP ZAP Quick Scan
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   zap_scan:
