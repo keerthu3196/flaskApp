@@ -15,7 +15,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+        
+      - name: Log in to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
       - name: Pull OWASP ZAP Docker Image
         run: docker pull owasp/zap2docker-stable
 
