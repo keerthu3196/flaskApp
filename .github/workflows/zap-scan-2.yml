@@ -23,13 +23,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           
       - name: Pull OWASP ZAP Docker Image
-        run: docker pull owasp/zap2docker-stable
+        run: docker pull ghcr.io/zaproxy/zaproxy:stable
 
       - name: Run OWASP ZAP Quick Scan
         run: |
-          docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable \
+          docker run -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable \
           zap-baseline.py \
-          -t https://www.example.com -g gen.conf -r testreport.html
+          -t https://juice-shop.herokuapp.com/#/ -g gen.conf -r testreport.html
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
