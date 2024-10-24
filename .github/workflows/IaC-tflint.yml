@@ -1,0 +1,21 @@
+name: Terraform Linting
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  terraform-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run TFLint in Docker
+        run: |
+          docker run --rm -v $(pwd):/data -t ghcr.io/terraform-linters/tflint
