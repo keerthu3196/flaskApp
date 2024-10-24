@@ -25,9 +25,12 @@ jobs:
       - name: Pull OWASP ZAP Docker Image
         run: docker pull ghcr.io/zaproxy/zaproxy:stable
 
+      - name: Ensure write permissions for ZAP directory
+        run: chmod -R 777 ${{ github.workspace }}
+
       - name: Run OWASP ZAP Quick Scan
         run: |
-          sudo docker run -v ${{ github.workspace }}:/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t https://www.example.com -r testreport.html
+          sudo docker run -v ${{ github.workspace }}:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t https://www.example.com -r testreport.html
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
