@@ -1,0 +1,36 @@
+name: OWASP ZAP Quick Scan
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Log in to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+      - name: Pull Bandit Image
+        run: docker pull ghcr.io/pycqa/bandit/bandit
+
+      - name: Run Bandit in the project path
+        run: |
+          docker run -v $(pwd)/output:/tmp/output -t ghcr.io/pycqa/bandit/bandit:latest -r ./ -f json -o output.json
+      
+      - name: Upload the Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-report
+          path: /output/output.json
