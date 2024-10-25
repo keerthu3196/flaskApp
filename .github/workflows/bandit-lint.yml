@@ -27,6 +27,7 @@ jobs:
 
       - name: Run Bandit in the project path
         run: |
+          mkdir -p output
           docker run -v $(pwd)/output:/tmp/output -t ghcr.io/pycqa/bandit/bandit:latest -r ./ -f json -o output.json
       
       - name: Upload the Report
