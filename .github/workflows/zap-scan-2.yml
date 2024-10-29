@@ -27,7 +27,7 @@ jobs:
 
       - name: Run OWASP ZAP Quick Scan
         run: |
-          docker run --name zap-baseline -v ${{ github.workspace }}:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t https://www.example.com -r testreport.html
+          docker run --name zap-baseline -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t https://www.example.com -r testreport.html
           docker cp zap-baseline:/zap/wrk/testreport.html .
           
       - name: Upload ZAP Report
