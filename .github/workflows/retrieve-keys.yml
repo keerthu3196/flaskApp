@@ -37,7 +37,7 @@ jobs:
             format: openapi
             target: "https://api.openweathermap.org/data/2.5/weather?q=CityName&appid=${{ env.API_KEY }}"
             rules_file_name: '.zap/rules.tsv'
-            cmd_options: '-a -x zap-report.xml'
+            cmd_options: '-x zap-report.xml -a'
             
         - name: Pull OWASP ZAP Docker Image
           run: docker pull ghcr.io/zaproxy/zaproxy:stable
