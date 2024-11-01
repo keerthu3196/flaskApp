@@ -15,7 +15,7 @@ jobs:
           id: import-secrets
           uses: hashicorp/vault-action@v2
           with:
-            url: http://${{ secrets.VAULT_ADDR}}
+            url: ${{ secrets.VAULT_ADDR}}
             token: ${{ secrets.VAULT_TOKEN }}
             secrets: |
                 secret/data/capston api-key | API_KEY;
