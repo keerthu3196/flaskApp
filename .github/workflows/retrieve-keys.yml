@@ -16,6 +16,7 @@ jobs:
           uses: hashicorp/vault-action@v2
           with:
             url: ${{ secrets.VAULT_ADDR}}
+            caCertificate: ${{ secrets.CA_CERT_PATH }}
             token: ${{ secrets.VAULT_TOKEN }}
             secrets: |
-                secret/data/capston api-key | API_KEY;
+                secret/data/capstone api-key | API_KEY;
