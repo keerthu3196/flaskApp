@@ -22,4 +22,6 @@ jobs:
                 
         - name: Step following Import Secrets
           run:  |
-            ACCESS_KEY_ID = "${{ env.API_KEY }}"
+            API_KEY = "${{ env.API_KEY }}"
+            docker run -t owasp/zap2docker-stable zap-api-scan.py  -t "https://api.openweathermap.org/data/2.5/weather?q=CityName&appid=${{ env.API_KEY }}" -f openapi -r zap_report.html
+
