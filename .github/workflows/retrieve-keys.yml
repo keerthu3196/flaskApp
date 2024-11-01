@@ -34,7 +34,7 @@ jobs:
     
         - name: Run OWASP ZAP Quick Scan
           run: |
-              docker run -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-api-scan.py -t "https://api.openweathermap.org/data/2.5/weather?q=CityName&appid=${{ env.API_KEY }}" -f openapi -r zap_report.html
+              docker run -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-api-scan.py -t "https://api.openweathermap.org/data/2.5/weather?q=CityName&appid=${{ env.API_KEY }}" -f openapi -x zap_report.xml
           
         - name: Upload ZAP Report
           uses: actions/upload-artifact@v4
