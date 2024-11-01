@@ -15,7 +15,7 @@ jobs:
           id: import-secrets
           uses: hashicorp/vault-action@v2
           with:
-            url: ${{ secrets.VAULT_ADDR}}
+            url: https://54.209.241.113:8200
             caCertificate: ${{ secrets.CA_CER_PATH}}
             token: ${{ secrets.VAULT_TOKEN }}
             secrets: |
