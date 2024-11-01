@@ -21,10 +21,8 @@ jobs:
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-x report.xml -a'
           
-      - name: ZAP Scan
-        uses: zaproxy/action-baseline@41aee98ebc7cf2802c3beae4e7d4336413a21e43 # v0.9.0
+      - name: Upload ZAP Report
+        uses: actions/upload-artifact@v4
         with:
-          token: ${{ secrets.TOKEN }}
-          target: 'https://preview.owasp-juice.shop'
-          rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-a -j'
+            name: zap-report
+            path: report.xml
