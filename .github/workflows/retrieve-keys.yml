@@ -18,7 +18,7 @@ jobs:
             url: ${{ secrets.VAULT_ADDR }}
             token: ${{ secrets.VAULT_TOKEN }}
             secrets: |
-                secret/data/capstone api-key | API_KEY;
+                secret/data/ci api-key | API_KEY;
                 
         - name: Step following Import Secrets
           run:  |
