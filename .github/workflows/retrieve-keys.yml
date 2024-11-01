@@ -39,16 +39,9 @@ jobs:
             rules_file_name: '.zap/rules.tsv'
             cmd_options: '-x zap-report.xml -a'
             
-        - name: Pull OWASP ZAP Docker Image
-          run: docker pull ghcr.io/zaproxy/zaproxy:stable
-    
-        - name: Run OWASP ZAP Quick Scan
-          run: |
-              docker run -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-api-scan.py -t "https://api.openweathermap.org/data/2.5/weather?q=CityName&appid=${{ env.API_KEY }}" -f openapi -I -x zap_report.xml
-          
         - name: Upload ZAP Report
           uses: actions/upload-artifact@v4
           with:
             name: zap-report
-            path: zap_report.html
+            path: zap-report.xml
                 
